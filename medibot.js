@@ -1,5 +1,6 @@
 import OpenAI from "openai";
-import { readFromJsonFile, saveToJsonFile } from "./json-methods.js";
+import { readFromJsonFile, saveToJsonFile } from "./utils/json-methods.js";
+import { getContext } from "./vector_database/db-methods.js";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Replace with your OpenAI API key
@@ -38,7 +39,6 @@ export async function getResponse(userId , userMessage) {
     }
   }
 
-  //const userMessage = req.body.message;
 
   // Add a Message to the Thread
   try {
@@ -47,9 +47,13 @@ export async function getResponse(userId , userMessage) {
       {
         role: "user",
         content: userMessage,
+        
       }
     );
     console.log("This is the message object: ", myThreadMessage, "\n");
+
+    // get the similar data from our vector store
+    // let context = await getContext(query);
 
     // Run the Assistant
     const myRun = await openai.beta.threads.runs.create(
@@ -57,7 +61,6 @@ export async function getResponse(userId , userMessage) {
       {
         assistant_id: assistantIdToUse,
         instructions: "Please address the user as patient. Tell the user of possible cause of that problem. Give short and to the point answer preferably in bullet points. Give warning at the end too so user will not get an idea to cross check the results with actual doctor.",
-
       }
     );
     console.log("This is the run object: ", myRun, "\n");

@@ -22,21 +22,3 @@ export const readFromJsonFile = (filePath) => {
   }
 };
 
-// // Example usage
-// const filePath = 'example.json';
-
-// // Sample object to be stored in JSON file
-// const myObject = {
-//   name: 'John Doe',
-//   age: 30,
-//   city: 'Example City'
-// };
-
-// // Save the object to a JSON file
-// saveToJsonFile(filePath, myObject);
-
-// // Read the object from the JSON file
-// const retrievedObject = readFromJsonFile(filePath);
-
-// // Output the retrieved object
-// console.log('Retrieved Object:', retrievedObject);

@@ -60,7 +60,7 @@ export async function getResponse(userId , userMessage) {
       threadByUser[userId], // Use the stored thread ID for this user
       {
         assistant_id: assistantIdToUse,
-        instructions: "Please address the user as patient. Tell the user of possible cause of that problem. Give short and to the point answer preferably in bullet points. Give warning at the end too so user will not get an idea to cross check the results with actual doctor.",
+        instructions: "Please address the user as patient. Tell the user of possible cause of that problem. Give short and to the point answer preferably in bullet points. Give warning at the end too so user will not get an idea to cross check the results with actual doctor. If user asks any other question which is not related to medical then respond that you're medical bot and you can only respond to medical related queries.",
       }
     );
     console.log("This is the run object: ", myRun, "\n");
